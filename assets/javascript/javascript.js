@@ -68,7 +68,7 @@ createCharacterDiv();
       var charImg = $("<img>");
       charImg.addClass("imgClear character-image img-fluid img-" + characters[i]);
       charImg.appendTo(characterbtn);
-      charImg.attr("src", "../starwarsbattle/assets/images/coolCharacters/boba-fett-thumbnail.jpg");
+      charImg.attr("src", "../starwarsbattle/assets/images/coolCharacters/" + characters[i] + "-thumbnail.jpg");
       };
       }
       }
@@ -261,7 +261,7 @@ createCharacterDiv();
 
     $( ".img-admiralAkbar" ).hover(
       function() {
-        $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/boba-fett3.jpg" );
+        $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/admiralAkbar-big.jpg" );
       }, function() {
         $(".charDisplay" ).attr("src","").empty();
       }
@@ -269,7 +269,7 @@ createCharacterDiv();
 
     $( ".img-bobbaFett" ).hover(
       function() {
-        $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/boba-fett3.jpg" );
+        $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/bobbaFett-big.jpg" );
       }, function() {
         $(".charDisplay" ).attr("src","").empty();
       }
@@ -277,7 +277,7 @@ createCharacterDiv();
 
     $( ".img-darthVader" ).hover(
       function() {
-        $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/boba-fett3.jpg" );
+        $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/darthVader-big.jpg" );
       }, function() {
         $(".charDisplay" ).attr("src","").empty();
       }
@@ -285,7 +285,7 @@ createCharacterDiv();
 
     $( ".img-chewbaca" ).hover(
       function() {
-        $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/boba-fett3.jpg" );
+        $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/chewbaca-big.jpg" );
       }, function() {
         $(".charDisplay" ).attr("src","").empty();
       }

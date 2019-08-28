@@ -8,6 +8,11 @@ body {
 }
 
 
+.char-display {
+  min-height: 600px;
+  border:2px solid white;
+  background:black;
+}
 
 
 .char-text {
