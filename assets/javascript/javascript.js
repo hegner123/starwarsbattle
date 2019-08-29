@@ -130,6 +130,7 @@ hoverCharacter();
           } else {;}
           }
           $(".comp-character").attr("src", computerCharacter.imgSrc);
+          
           $(".user-character").attr("src", userCharacter.imgSrc);
 
           } 
@@ -246,6 +247,7 @@ hoverCharacter();
         $(".arena").hide();
         $(".character-select-screen").show();
         hoverCharacter();
+        resetAnimation();
         }
 
   function winState () {
@@ -314,6 +316,27 @@ hoverCharacter();
     function hiddenArena (){
       $(".arena").hide();
     }
+
+    
+
+// reset the transition by...
+function resetAnimation(){
+  
+$("#star-wars").preventDefault;
+  // -> removing the class
+  $("#star-wars").removeClass("star-wars");
+  
+  // -> triggering reflow /* The actual magic */
+  // without this it wouldn't work. Try uncommenting the line and the transition won't be retriggered.
+  // Oops! This won't work in strict mode. Thanks Felis Phasma!
+  // element.offsetWidth = element.offsetWidth;
+  // Do this instead:
+  void $("#star-wars").offsetWidth;
+  
+  // -> and re-adding the class
+  $("#star-wars").addClass("star-wars");
+
+}
      
   
   })
