@@ -19,3 +19,30 @@ body {
   color: white;
   font-size:26px;
 }
+
+.user-chara-sel {
+  border: solid 1px green;
+}
+
+.comp-chara-sel {
+  border: solid 1px red;
+}
+
+.character {
+  height: 200px;
+  width: 200px;
+  background:white;
+  border: solid black  1px ;
+}
+
+.character-big {
+  height: 600px;
+  width: 300px;
+  background:white;
+  border: solid black  1px ;
+}
+
+.btn {
+  background:white;
+  color:black;
+}

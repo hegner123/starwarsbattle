@@ -1,4 +1,6 @@
 $(document).ready(function () {
+
+  hiddenArena();
   // main character variables
 
   var userCharacter = "";
@@ -6,12 +8,12 @@ $(document).ready(function () {
   var computerCharacter = "";
 
   // character values ------------------------------------------------------------------------------------------------------------------------
-  var admiralAkbar = {
-    data: "admiralAkbar",
+  var lukeSkywalker = {
+    data: "lukeSkywalker",
     hp: 90,
     attack: 2,
     counterAttack: 2,
-    display: "Admiral Akbar",
+    display: "Luke Skywalker",
   }
 
   var bobbaFett = {
@@ -38,8 +40,8 @@ $(document).ready(function () {
     display: "Darth Vader",
   }
 // character arrays ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-  var characters = ["admiralAkbar", "bobbaFett", "chewbaca", "darthVader"];
-  var characterObject = [admiralAkbar, bobbaFett, chewbaca, darthVader];
+  var characters = ["lukeSkywalker", "bobbaFett", "chewbaca", "darthVader"];
+  var characterObject = [ lukeSkywalker, bobbaFett, chewbaca, darthVader];
 
 // run createcharacterdiv
 createCharacterDiv();
@@ -79,8 +81,7 @@ createCharacterDiv();
       if (game.step < 1) {
         userCharacter = $(this).data();
         $(this).addClass("user-chara-sel");
-        $(this).removeClass("not-selected");
-        $(".not-selected").appendTo("#enemy-select");
+        
         game.state = compCharacterSel();
         console.log(userCharacter);
         game.step += 1;
@@ -127,6 +128,9 @@ createCharacterDiv();
 
 // function to be run when player has chosen a character and chosen a character for computer player------------------------------------------
   function attackState() {
+    $(".character-select-screen").hide();
+    $(".arena").show();
+    
     $("#attack-button").on("click", function () {
       if ((game.state == winState) || (game.state == loseState)) {
         ;
@@ -205,7 +209,7 @@ createCharacterDiv();
       } else {;}
       }
 
-      $(".reset").on("click", function () {
+      $("#reset").on("click", function () {
         reset();
       });
 
@@ -216,8 +220,8 @@ createCharacterDiv();
         computerCharacter = "";
         game.step = 0;
         game.opponents = 3;
-        admiralAkbar.hp = 90;
-        admiralAkbar.attack = 2;
+        lukeSkywalker.hp = 90;
+        lukeSkywalker.attack = 2;
         chewbaca.hp = 120;
         chewbaca.attack = 20;
         bobbaFett.hp = 95;
@@ -230,6 +234,8 @@ createCharacterDiv();
         $(".box-three").text(""); 
         $(".box-four").text("");
         game.state = charaSel();
+        $(".arena").hide();
+        $(".character-select-screen").show();
         }
 
   function winState () {
@@ -259,9 +265,9 @@ createCharacterDiv();
     }
 
 
-    $( ".img-admiralAkbar" ).hover(
+    $( ".img-lukeSkywalker" ).hover(
       function() {
-        $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/admiralAkbar-big.jpg" );
+        $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/lukeSkywalker-big.jpg" );
       }, function() {
         $(".charDisplay" ).attr("src","").empty();
       }
@@ -290,6 +296,10 @@ createCharacterDiv();
         $(".charDisplay" ).attr("src","").empty();
       }
     );
+
+    function hiddenArena (){
+      $(".arena").hide();
+    }
      
   
   })
