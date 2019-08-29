@@ -46,3 +46,7 @@ body {
   background:white;
   color:black;
 }
+
+.versus-text {
+  glyph-orientation-vertical: auto;
+}

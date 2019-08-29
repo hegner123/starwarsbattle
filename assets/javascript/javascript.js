@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
   hiddenArena();
+  
   // main character variables
 
   var userCharacter = "";
@@ -14,6 +15,7 @@ $(document).ready(function () {
     attack: 2,
     counterAttack: 2,
     display: "Luke Skywalker",
+    imgSrc:"../starwarsbattle/assets/images/coolCharacters/lukeSkywalker-big.jpg",
   }
 
   var bobbaFett = {
@@ -22,6 +24,7 @@ $(document).ready(function () {
     attack: 2,
     counterAttack: 2,
     display: "Bobba Fett",
+    imgSrc:"../starwarsbattle/assets/images/coolCharacters/bobbaFett-big.jpg",
   }
 
   var chewbaca = {
@@ -29,7 +32,8 @@ $(document).ready(function () {
     hp: 120,
     attack: 2,
     counterAttack: 2,
-    display: "Chewbaca"
+    display: "Chewbaca",
+    imgSrc:"../starwarsbattle/assets/images/coolCharacters/chewbaca-big.jpg"
   }
 
   var darthVader = {
@@ -38,6 +42,7 @@ $(document).ready(function () {
     attack: 35,
     counterAttack: 35,
     display: "Darth Vader",
+    imgSrc:"../starwarsbattle/assets/images/coolCharacters/darthVader-big.jpg",
   }
 // character arrays ----------------------------------------------------------------------------------------------------------------------------------------------------------------
   var characters = ["lukeSkywalker", "bobbaFett", "chewbaca", "darthVader"];
@@ -45,8 +50,8 @@ $(document).ready(function () {
 
 // run createcharacterdiv
 createCharacterDiv();
-
-
+// run hover function
+hoverCharacter();
 
   // create div's with images with for loop------------------------------------------------------------------------------------------------
   function createCharacterDiv () {
@@ -83,7 +88,7 @@ createCharacterDiv();
         $(this).addClass("user-chara-sel");
         
         game.state = compCharacterSel();
-        console.log(userCharacter);
+        
         game.step += 1;
         return "charaSel"
       } else {;}
@@ -99,6 +104,7 @@ createCharacterDiv();
         $(this).addClass("comp-chara-sel");
         $(".comp-chara-sel").appendTo("#attack-target");
         game.state = attackState();
+        
         game.step += 1;
         assignCharacterData();
       } else {;}
@@ -123,6 +129,9 @@ createCharacterDiv();
             computerCharacter = characterObject[j];
           } else {;}
           }
+          $(".comp-character").attr("src", computerCharacter.imgSrc);
+          $(".user-character").attr("src", userCharacter.imgSrc);
+
           } 
       }
 
@@ -236,6 +245,7 @@ createCharacterDiv();
         game.state = charaSel();
         $(".arena").hide();
         $(".character-select-screen").show();
+        hoverCharacter();
         }
 
   function winState () {
@@ -264,6 +274,9 @@ createCharacterDiv();
     losses:0,
     }
 
+    function hoverCharacter() {
+
+   
 
     $( ".img-lukeSkywalker" ).hover(
       function() {
@@ -296,6 +309,7 @@ createCharacterDiv();
         $(".charDisplay" ).attr("src","").empty();
       }
     );
+  }
 
     function hiddenArena (){
       $(".arena").hide();
