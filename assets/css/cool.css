@@ -14,6 +14,12 @@ body {
 }
 .box {
   color:#ffffff;
+  list-style: none;
+}
+
+.box-box {
+  display: block;
+  max-height: 2rem;
 }
 
 .char-text {
@@ -39,6 +45,7 @@ body {
 .character-image:hover{
   opacity: 0.8;
   background-color:black;
+  cursor: pointer;
 }
 
 .character-big {
@@ -53,10 +60,40 @@ body {
   color:black;
 }
 
+.vs-img-div {
+  align-self: center;
+}
+
 .versus-text {
   glyph-orientation-vertical: auto;
 }
 
+.attack-button-div {
+  align-self: center;
+}
+
+#attack-button {
+  padding: 20px;
+}
+
+.arena-character {
+  display:flex;
+  justify-content: center;
+}
+
+.win {
+  color: white;
+}
+.loss {
+  color: white;
+}
+
+.scoreboard {
+  padding: 1px;
+  background: black;
+  border: solid 5px white;
+  height: 15rem;
+}
 .star-wars {
   /* Flexbox to center the entire element on the screen */
   display: flex;
@@ -74,6 +111,7 @@ body {
 
 .crawl {
   /* Position the element so we can adjust the top property in the animation */
+  cursor: pointer;
   position: relative;
   font-size:40px;
   /* Making sure the text is fully off the screen at the start and end of the animation */
@@ -81,7 +119,9 @@ body {
   /* Defines the skew origin at the very center when we apply transforms on the animation */
   transform-origin: 50% 100%;
   /* Adds the crawl animation, which plays for one minute */
-  animation: crawl 60s linear;
+  animation: crawl 120s linear;
+  
+  animation-play-state:paused;
   animation-iteration-count:infinite;
 }
 

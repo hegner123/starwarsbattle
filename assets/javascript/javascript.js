@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+  $(".scoreboard").hide();
   hiddenArena();
   
   // main character variables
@@ -61,6 +61,7 @@ hoverCharacter();
     characterbtn.addClass("chara-button not-selected col col-6 float-left " + characters[i]);
     characterbtn.data("data", characters[i]);
     characterbtn.prependTo("#char-sel");
+    
     characterImage();
     characterText();
 
@@ -87,8 +88,9 @@ hoverCharacter();
         userCharacter = $(this).data();
         $(this).addClass("user-chara-sel");
         
+
         game.state = compCharacterSel();
-        
+       
         game.step += 1;
         return "charaSel"
       } else {;}
@@ -129,9 +131,10 @@ hoverCharacter();
             computerCharacter = characterObject[j];
           } else {;}
           }
-          $(".comp-character").attr("src", computerCharacter.imgSrc);
+          $(".comp-character-attack-img").attr("src", computerCharacter.imgSrc);
+
           
-          $(".user-character").attr("src", userCharacter.imgSrc);
+          $(".user-character-attack-img").attr("src", userCharacter.imgSrc);
 
           } 
       }
@@ -142,6 +145,7 @@ hoverCharacter();
     $(".arena").show();
     
     $("#attack-button").on("click", function () {
+      console.log("hi");
       if ((game.state == winState) || (game.state == loseState)) {
         ;
       } else if ((userCharacter.hp > 0) && (computerCharacter.hp > 0)) {
@@ -184,6 +188,8 @@ hoverCharacter();
       console.log(computerCharacter.display);
       computerCharacter = "";
       $(".defeated").hide();
+      $(".arena").hide();
+      $(".character-select-screen").show();
       game.opponents-- ;
       game.step = 1;
       } else {;}
@@ -198,6 +204,8 @@ hoverCharacter();
       $(".box-three").text(computerCharacter.display + " did " + computerCharacter.counterAttack + " damage");
       $(".box-two").text("Wins: " + game.wins + "|| " + "Loses: " + game.losses);
       $(".box-one").text("  ");
+      $(".win").text("Win: " + game.wins);
+      $(".losss").text("Lose: "+ game.losses);
       checkStats();
     } else if (!computerCharacter) {
       $("div.user-chara-sel > p").text(userCharacter.hp);
@@ -205,6 +213,8 @@ hoverCharacter();
       $(".box-three").text(defeatedName + " was defeated! Please select the next enemy to defeat!");
       $(".box-two").text("Wins: " + game.wins + "|| " + "Loses: " + game.losses);
       $(".box-one").text("  ");
+      $(".win").text("Win: " + game.wins);
+      $(".loss").text("Lose: "+ game.losses);
       checkStats();
     } else {;}
     }
@@ -217,6 +227,7 @@ hoverCharacter();
         userCharacter = "";
         game.state = loseState();
       } else {;}
+      $(".scoreboard").show();
       }
 
       $("#reset").on("click", function () {
@@ -280,7 +291,7 @@ hoverCharacter();
 
    
 
-    $( ".img-lukeSkywalker" ).hover(
+    $( ".img-lukeSkywalker" ).hover( 
       function() {
         $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/lukeSkywalker-big.jpg" );
       }, function() {
@@ -288,7 +299,7 @@ hoverCharacter();
       }
     );
 
-    $( ".img-bobbaFett" ).hover(
+    $( ".img-bobbaFett" ).hover( 
       function() {
         $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/bobbaFett-big.jpg" );
       }, function() {
@@ -296,7 +307,7 @@ hoverCharacter();
       }
     );
 
-    $( ".img-darthVader" ).hover(
+    $( ".img-darthVader" ).hover( 
       function() {
         $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/darthVader-big.jpg" );
       }, function() {
@@ -304,7 +315,7 @@ hoverCharacter();
       }
     );
 
-    $( ".img-chewbaca" ).hover(
+    $( ".img-chewbaca" ).hover( 
       function() {
         $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/chewbaca-big.jpg" );
       }, function() {
@@ -322,21 +333,19 @@ hoverCharacter();
 // reset the transition by...
 function resetAnimation(){
   
-$("#star-wars").preventDefault;
-  // -> removing the class
-  $("#star-wars").removeClass("star-wars");
-  
-  // -> triggering reflow /* The actual magic */
-  // without this it wouldn't work. Try uncommenting the line and the transition won't be retriggered.
-  // Oops! This won't work in strict mode. Thanks Felis Phasma!
-  // element.offsetWidth = element.offsetWidth;
-  // Do this instead:
-  void $("#star-wars").offsetWidth;
-  
-  // -> and re-adding the class
-  $("#star-wars").addClass("star-wars");
+$(".character-select-screen").hide();
+$(".arena").show();
+$(".arena").hide();
+$(".character-select-screen").show();
+crawl.style.animationPlayState = "paused";
 
 }
+
+var crawl = document.getElementById("crawl");
+
+$(".crawl").on("click", function (){
+  crawl.style.animationPlayState = "running";
+})
      
   
   })

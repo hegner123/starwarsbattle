@@ -23,20 +23,36 @@
           <div class="row">
             
           
-            <div class="col col-7 user-character-attack-screen" >
-              <img class="user-character" src="" alt="pic"/>
-                <img src="assets/images/vs.svg" width="40%" alt="VS">
-                <button class="btn float-right" id="attack-button">ATTACK</button>
+            <div class="col col-4 user-character-attack-screen arena-character" id="user-character-attack-screen" >
+                <img class="user-character-attack-img" src="" alt="Picture">
             </div>
+
+            <div class="col col-4  ">
+              <div class="row">
+                <div class="col col-12 vs-img-div">
+                    <img class="vs-img" src="assets/images/vs.svg" width="100%" alt="VS">
+                </div>
+
+                <div class="col col-12">
+                    <button class="btn" id="attack-button">ATTACK</button>
+                    <ul class="box-box">
+                        <li class="box box-one"></li>
+                        <li class="box box-two"></li>
+                        <li class="box box-three"></li>
+                        <li class="box box-four"></li>
+                      </ul>
+                </div>
+
+
+              </div>
+            </div>
+
+           
             
-            <div class="col col-5 comp-character-attack-screen">
-              <img class="comp-character" src="" alt="pic"/>
-              <ul>
-                <li class="box box-one"></li>
-                <li class="box box-two"></li>
-                <li class="box box-three"></li>
-                <li class="box box-four"></li>
-              </ul>
+            <div class="col col-4 comp-character-attack-screen arena-character">
+              
+              <img class="comp-character-attack-img" src="" alt="Picture"/>
+              
             </div>
           
           
@@ -48,7 +64,7 @@
 <div class="row">
     <section id="star-wars" class="star-wars col col-2 float-left">
 
-        <div class="crawl">
+        <div class="crawl" id="crawl">
           
           <div class="title">
             <h1>Star Wars</h1>
@@ -62,13 +78,21 @@
       </section>
       
   
-  <div class="col-4" id="char-sel">
+  <div class="col-4 char-sel" id="char-sel">
   </div>
 
     <div class="col col-5 char-display">
-      <img src="" alt="" class="charDisplay">
+      <div class="row">
+      <img src="" alt="" class="charDisplay col col-9">
+        <div class="col col-3 scoreboard">
+      <div class="row">
+          <h2 class="win col col-12"></h2>
+          <h2 class="loss col col-12"></h2>
+      </div>
+    </div>
       
-
+      
+    </div>
     </div>
 
 
@@ -79,7 +103,7 @@
 
 
             <div class="row">
-          <div class="fixed-bottom col col-12 p-2 ml-4 mb-5">
+          <div class="fixed-bottom col col-12 p-2 ml-4 mb-2">
             <button class="btn-dark" id="reset">Reset!</button>
           </div>
           </div>
