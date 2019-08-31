@@ -1,6 +1,17 @@
 $(document).ready(function () {
   $(".scoreboard").hide();
   hiddenArena();
+  hiddenWinScreen();
+
+
+  function hiddenArena (){
+    $(".arena").hide();
+  }
+
+  function hiddenWinScreen () {
+    $(".win-screen").hide();
+  }
+
   
   // main character variables
 
@@ -44,6 +55,45 @@ $(document).ready(function () {
     display: "Darth Vader",
     imgSrc:"../starwarsbattle/assets/images/coolCharacters/darthVader-big.jpg",
   }
+
+        function hoverCharacter() {
+          $( ".img-lukeSkywalker" ).hover( 
+            function() {
+              $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/lukeSkywalker-big.jpg" );
+            }, function() {
+              $(".charDisplay" ).attr("src","").empty();
+            }
+          );
+
+          $( ".img-bobbaFett" ).hover( 
+            function() {
+              $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/bobbaFett-big.jpg" );
+            }, function() {
+              $(".charDisplay" ).attr("src","").empty();
+            }
+          );
+
+          $( ".img-darthVader" ).hover( 
+            function() {
+              $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/darthVader-big.jpg" );
+            }, function() {
+              $(".charDisplay" ).attr("src","").empty();
+            }
+          );
+
+          $( ".img-chewbaca" ).hover( 
+            function() {
+              $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/chewbaca-big.jpg" );
+            }, function() {
+              $(".charDisplay" ).attr("src","").empty();
+            }
+          );
+        }
+
+          
+
+ 
+
 // character arrays ----------------------------------------------------------------------------------------------------------------------------------------------------------------
   var characters = ["lukeSkywalker", "bobbaFett", "chewbaca", "darthVader"];
   var characterObject = [ lukeSkywalker, bobbaFett, chewbaca, darthVader];
@@ -104,9 +154,8 @@ hoverCharacter();
       if (game.step < 2 && ($(this).hasClass("not-selected"))) {
         computerCharacter = $(this).data();
         $(this).addClass("comp-chara-sel");
-        $(".comp-chara-sel").appendTo("#attack-target");
+        $(".comp-chara-sel").hide();
         game.state = attackState();
-        
         game.step += 1;
         assignCharacterData();
       } else {;}
@@ -181,19 +230,14 @@ hoverCharacter();
 
     function defeatedCharacter () {
       if (computerCharacter.hp <= 0){
-      $("div.attack-target > div").removeClass("comp-chara-sel");
-      $("div.attack-target > div").addClass("defeated");
+      $(computerCharacter).removeClass("comp-chara-sel");
+      $(computerCharacter).addClass("defeated");
       defeatedName = computerCharacter.display;
-      console.log(defeatedName);
-      console.log(computerCharacter.display);
       computerCharacter = "";
       $(".defeated").hide();
-      $(".arena").hide();
-      $(".character-select-screen").show();
       game.opponents-- ;
       game.step = 1;
-      } else {;}
-      }
+      }}
 
      // display the results of the attack state ------------------------------------------------------------------------------------------------------------------------
   function displayStuff() {
@@ -202,7 +246,6 @@ hoverCharacter();
       $("div.comp-chara-sel > p").text(computerCharacter.hp);
       $(".box-four").text(userCharacter.display + " did " + userCharacter.attack + " damage");
       $(".box-three").text(computerCharacter.display + " did " + computerCharacter.counterAttack + " damage");
-     
       $(".win").text("Win: " + game.wins);
       $(".losss").text("Lose: "+ game.losses);
       checkStats();
@@ -210,23 +253,24 @@ hoverCharacter();
       $("div.user-chara-sel > p").text(userCharacter.hp);
       $(".box-four").text(userCharacter.display + " did " + userCharacter.attack + " damage");
       $(".box-three").text(defeatedName + " was defeated! Please select the next enemy to defeat!");
-      
-      
       $(".win").text("Win: " + game.wins);
       $(".loss").text("Lose: "+ game.losses);
       checkStats();
-    } else {;}
-    }
+      $(".arena").hide();
+      $(".character-select-screen").show();
+    } }
 
   // runs at the end of display stuff, final action of attack chain of functions.
     function checkStats () {
       if (game.opponents == 0) {
+    $(".character-select-screen").show();
+    $(".character-select-screen").hide();
+    $(".win-screen").show();
         game.state = winState();
       } else if ((userCharacter.hp <= 0) && (!userCharacter == false)) {
         userCharacter = "";
         game.state = loseState();
-      } else {;}
-      $(".scoreboard").show();
+      } $(".scoreboard").show();
       }
 
       $("#reset").on("click", function () {
@@ -261,11 +305,13 @@ hoverCharacter();
         }
 
   function winState () {
-    console.log("win")
-    game.wins++
-    $(".box-two").text("Wins: " + game.wins + "|| " + "Loses: " + game.losses);
-    $(".box-four").text("You Win")
-    $(".box-three").text("");
+   
+    
+    
+    game.wins++ ;
+    // $(".box-two").text("Wins: " + game.wins + "|| " + "Loses: " + game.losses);
+    // $(".box-four").text("You Win")
+    // $(".box-three").text("");
   }
 
   function loseState () {
@@ -286,65 +332,23 @@ hoverCharacter();
     losses:0,
     }
 
-    function hoverCharacter() {
+//  auxillary disply functions -------------------------------------------------------------------------------
+ // reset the transition by...
+ function resetAnimation(){
+    
+  $(".character-select-screen").hide();
+  $(".arena").show();
+  $(".arena").hide();
+  $(".character-select-screen").show();
+  crawl.style.animationPlayState = "paused";
 
-   
-
-    $( ".img-lukeSkywalker" ).hover( 
-      function() {
-        $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/lukeSkywalker-big.jpg" );
-      }, function() {
-        $(".charDisplay" ).attr("src","").empty();
-      }
-    );
-
-    $( ".img-bobbaFett" ).hover( 
-      function() {
-        $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/bobbaFett-big.jpg" );
-      }, function() {
-        $(".charDisplay" ).attr("src","").empty();
-      }
-    );
-
-    $( ".img-darthVader" ).hover( 
-      function() {
-        $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/darthVader-big.jpg" );
-      }, function() {
-        $(".charDisplay" ).attr("src","").empty();
-      }
-    );
-
-    $( ".img-chewbaca" ).hover( 
-      function() {
-        $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/chewbaca-big.jpg" );
-      }, function() {
-        $(".charDisplay" ).attr("src","").empty();
-      }
-    );
   }
 
-    function hiddenArena (){
-      $(".arena").hide();
-    }
+  var crawl = document.getElementById("crawl");
 
-    
-
-// reset the transition by...
-function resetAnimation(){
-  
-$(".character-select-screen").hide();
-$(".arena").show();
-$(".arena").hide();
-$(".character-select-screen").show();
-crawl.style.animationPlayState = "paused";
-
-}
-
-var crawl = document.getElementById("crawl");
-
-$(".crawl").on("click", function (){
-  crawl.style.animationPlayState = "running";
-})
+  $(".crawl").on("click", function (){
+    crawl.style.animationPlayState = "running";
+  })
      
   
   })
