@@ -202,8 +202,7 @@ hoverCharacter();
       $("div.comp-chara-sel > p").text(computerCharacter.hp);
       $(".box-four").text(userCharacter.display + " did " + userCharacter.attack + " damage");
       $(".box-three").text(computerCharacter.display + " did " + computerCharacter.counterAttack + " damage");
-      $(".box-two").text("Wins: " + game.wins + "|| " + "Loses: " + game.losses);
-      $(".box-one").text("  ");
+     
       $(".win").text("Win: " + game.wins);
       $(".losss").text("Lose: "+ game.losses);
       checkStats();
@@ -211,8 +210,8 @@ hoverCharacter();
       $("div.user-chara-sel > p").text(userCharacter.hp);
       $(".box-four").text(userCharacter.display + " did " + userCharacter.attack + " damage");
       $(".box-three").text(defeatedName + " was defeated! Please select the next enemy to defeat!");
-      $(".box-two").text("Wins: " + game.wins + "|| " + "Loses: " + game.losses);
-      $(".box-one").text("  ");
+      
+      
       $(".win").text("Win: " + game.wins);
       $(".loss").text("Lose: "+ game.losses);
       checkStats();
