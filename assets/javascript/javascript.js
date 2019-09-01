@@ -132,9 +132,12 @@ hoverCharacter();
   function createCharacterDiv () {
   for (i = 0; i < characters.length; i++) {
     var hitpoints = characterObject[i].hp;
+    var charImgSrc = characterObject[i].imgSrc;
     var characterbtn = $("<div>");
     characterbtn.addClass("chara-button not-selected col col-6 float-left " + characters[i]);
     characterbtn.data("data", characters[i]);
+    characterbtn.attr("imgSrc", charImgSrc)
+    
     characterbtn.prependTo("#char-sel");
     characterImage();
     characterText();
@@ -160,7 +163,8 @@ hoverCharacter();
         userCharacter = $(this).data();
         $(this).addClass("user-chara-sel");
         toggleCharacterDisplay();
-        $(".user-img").attr("src", $(this).imgSrc)
+        $(this).hide();
+        $(".user-img").attr("src", $(this).attr("imgsrc"));
         game.state = compCharacterSel();
         game.step += 1;
         return "charaSel"
@@ -319,13 +323,13 @@ hoverCharacter();
         hoverCharacter();
         resetAnimation();
         hideWinScreen();
+        hideCharacterDisplay();
+        $(".user-img").attr("src", "");
 
         }
 
   function winState () {
    
-    
-    
     game.wins++ ;
     // $(".box-two").text("Wins: " + game.wins + "|| " + "Loses: " + game.losses);
     // $(".box-four").text("You Win")
