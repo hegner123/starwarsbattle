@@ -62,8 +62,6 @@ body {
   opacity: 0.5;
 }
 
-
-
 .character {
   height: 200px;
   width: 200px;
@@ -108,8 +106,6 @@ body {
   color: white;
 }
 
-
-
 .reset-button {
   padding: 1rem;
   position: absolute;
@@ -137,6 +133,7 @@ body {
   width:100%;
   height: inherit;
 }
+
 .user-hp-meter {
   width:100%;
   height: inherit;
