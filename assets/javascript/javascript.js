@@ -3,11 +3,15 @@ $(document).ready(function () {
   hideArena();
   hideWinScreen();
   hideCharacterDisplay();
+  hideBox();
 
   function hideCharacterDisplay () {
     $(".user-character-display").hide();
   }
 
+  function hideBox (){
+    $(".box").hide();
+  }
 
   function hideArena (){
     $(".arena").hide();
@@ -37,6 +41,10 @@ $(document).ready(function () {
     $(".character-select-screen").toggle();
   }
 
+  function toggleBox() {
+    $(".box").toggle();
+  }
+
   
   // main character variables
 
@@ -44,10 +52,14 @@ $(document).ready(function () {
 
   var computerCharacter = "";
 
+  function emptyComputerCharacter (){
+    computerCharacter ="";
+  }
+
   // character values ------------------------------------------------------------------------------------------------------------------------
   var lukeSkywalker = {
     data: "lukeSkywalker",
-    hp: 90,
+    hp: 100,
     attack: 2,
     counterAttack: 2,
     display: "Luke Skywalker",
@@ -56,7 +68,7 @@ $(document).ready(function () {
 
   var bobbaFett = {
     data: "bobbaFett",
-    hp: 95,
+    hp: 100,
     attack: 2,
     counterAttack: 2,
     display: "Bobba Fett",
@@ -65,7 +77,7 @@ $(document).ready(function () {
 
   var chewbaca = {
     data: "chewbaca",
-    hp: 120,
+    hp: 100,
     attack: 2,
     counterAttack: 2,
     display: "Chewbaca",
@@ -74,9 +86,9 @@ $(document).ready(function () {
 
   var darthVader = {
     data: "darthVader",
-    hp: 200,
-    attack: 35,
-    counterAttack: 35,
+    hp: 100,
+    attack: 2,
+    counterAttack: 2,
     display: "Darth Vader",
     imgSrc:"../starwarsbattle/assets/images/coolCharacters/darthVader-big.jpg",
   }
@@ -204,6 +216,7 @@ hoverCharacter();
           } else {;}
           }
           $(".comp-character-attack-img").attr("src", computerCharacter.imgSrc);
+          
 
           
           $(".user-character-attack-img").attr("src", userCharacter.imgSrc);
@@ -213,8 +226,12 @@ hoverCharacter();
 
 // function to be run when player has chosen a character and chosen a character for computer player------------------------------------------
   function attackState() {
-    hideCharacterScreen ()
+    hideCharacterScreen();
     toggleArena();
+    toggleBox();
+    $(".user-hp-meter").attr('aria-valuenow', userCharacter.hp).css('width', userCharacter.hp + '%');
+    $(".comp-hp-meter").attr('aria-valuenow', computerCharacter.hp).css('width', computerCharacter.hp + '%');
+    
     $("#attack-button").on("click", function () {
       console.log("hi");
       if ((game.state == winState) || (game.state == loseState)) {
@@ -231,7 +248,8 @@ hoverCharacter();
       } else if ((userCharacter.hp <= 0) || (computerCharacter.hp <= 0)) {
         defeatedCharacter();
         displayStuff();
-      } } );
+      } userCharacter.attack = userCharacter.attack + 10;
+       } );
       }
 
 // calculate new character stats THIS SECTION NEEDS WORK-----------------------------------------------------------------------------------------
@@ -240,7 +258,6 @@ hoverCharacter();
       } 
 
       function userfightAction() {
-        userCharacter.attack = userCharacter.attack + userCharacter.display.length;
         computerCharacter.hp = computerCharacter.hp - userCharacter.attack;
         } 
 // ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -253,7 +270,7 @@ hoverCharacter();
       $(computerCharacter).removeClass("comp-chara-sel");
       $(computerCharacter).addClass("defeated");
       defeatedName = computerCharacter.display;
-      computerCharacter = "";
+      emptyComputerCharacter();
       $(".defeated").hide();
       game.opponents-- ;
       game.step = 1;
@@ -264,6 +281,8 @@ hoverCharacter();
     if (!computerCharacter == false){
       $(".box-four").text(userCharacter.display + " did " + userCharacter.attack + " damage");
       $(".box-three").text(computerCharacter.display + " did " + computerCharacter.counterAttack + " damage");
+      $(".user-hp-meter").attr('aria-valuenow', userCharacter.hp).css('width', userCharacter.hp + '%');
+      $(".comp-hp-meter").attr('aria-valuenow', computerCharacter.hp).css('width', computerCharacter.hp + '%');
       $(".win").text("Win: " + game.wins);
       $(".losss").text("Lose: "+ game.losses);
       checkStats();
@@ -273,8 +292,9 @@ hoverCharacter();
       $(".box-three").text(defeatedName + " was defeated! Please select the next enemy to defeat!");
       $(".win").text("Win: " + game.wins);
       $(".loss").text("Lose: "+ game.losses);
-      $(".arena").hide();
-      $(".character-select-screen").show();
+      toggleArena();
+      toggleCharacterScreen();
+      toggleBox();
       checkStats();
     } 
     $(".win").text("Win: " + game.wins);
@@ -284,8 +304,6 @@ hoverCharacter();
   // runs at the end of display stuff, final action of attack chain of functions.
     function checkStats () {
       if (game.opponents == 0) {
-        hideCharacterScreen();
-        toggleWinScreen();
         game.state = winState();
       } else if ((userCharacter.hp <= 0) && (!userCharacter == false)) {
         userCharacter = "";
@@ -304,14 +322,14 @@ hoverCharacter();
         computerCharacter = "";
         game.step = 0;
         game.opponents = 3;
-        lukeSkywalker.hp = 90;
+        lukeSkywalker.hp = 100;
         lukeSkywalker.attack = 2;
-        chewbaca.hp = 120;
-        chewbaca.attack = 20;
-        bobbaFett.hp = 95;
-        bobbaFett.attack = 20 
-        darthVader.hp = 200;
-        darthVader.attack = 10;
+        chewbaca.hp = 100;
+        chewbaca.attack = 2;
+        bobbaFett.hp = 100;
+        bobbaFett.attack = 2; 
+        darthVader.hp = 100;
+        darthVader.attack = 2;
         createCharacterDiv();
         charaSel();
         $(".box-one").text("");
@@ -324,20 +342,19 @@ hoverCharacter();
         resetAnimation();
         hideWinScreen();
         hideCharacterDisplay();
+        hideBox();
         $(".user-img").attr("src", "");
 
         }
 
   function winState () {
-   
+    hideCharacterScreen();
+    toggleWinScreen();
+    $(".victory-img").attr("src", userCharacter.imgSrc);
     game.wins++ ;
-    // $(".box-two").text("Wins: " + game.wins + "|| " + "Loses: " + game.losses);
-    // $(".box-four").text("You Win")
-    // $(".box-three").text("");
   }
 
   function loseState () {
-    console.log("lose")
     game.losses++
     $(".box-two").text("Wins: " + game.wins + "|| " + "Loses: " + game.losses);
     $(".box-four").text("You Lose")

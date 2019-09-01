@@ -123,6 +123,25 @@ body {
   height: 15rem;
 }
 
+.user-hp {
+  position: absolute;
+  width: 100%
+}
+
+.comp-hp {
+  position: absolute;
+  width: 100%
+}
+
+.comp-hp-meter{
+  width:100%;
+  height: inherit;
+}
+.user-hp-meter {
+  width:100%;
+  height: inherit;
+}
+
 .star-wars {
   /* Flexbox to center the entire element on the screen */
   display: flex;
