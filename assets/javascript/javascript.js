@@ -194,6 +194,8 @@ hoverCharacter();
         game.state = attackState();
         game.step += 1;
         assignCharacterData();
+        $(".user-hp-meter").attr('aria-valuenow', 100).css('width', 100 + '%');
+        $(".comp-hp-meter").attr('aria-valuenow', 100).css('width', 100 + '%');
       } } )
       }
 
@@ -231,42 +233,57 @@ hoverCharacter();
     toggleBox();
     $(".user-hp-meter").attr('aria-valuenow', userCharacter.hp).css('width', userCharacter.hp + '%');
     $(".comp-hp-meter").attr('aria-valuenow', computerCharacter.hp).css('width', computerCharacter.hp + '%');
-    
     $("#attack-button").on("click", function () {
-      console.log("hi");
       if ((game.state == winState) || (game.state == loseState)) {
-        ;
+
+        console.log("error position one");
+
+
       } else if ((userCharacter.hp > 0) && (computerCharacter.hp > 0)) {
+
         userfightAction();
-          if (computerCharacter.hp < 0) {
-            displayStuff()
-          } else {
-            computerfightAction();
-            defeatedCharacter();
+
+        console.log("error position two");
+
+          if (computerCharacter.hp <= 0) {
+
             displayStuff();
+
+          } else {
+
+            computerfightAction();
+            displayStuff();
+            
           };
-      } else if ((userCharacter.hp <= 0) || (computerCharacter.hp <= 0)) {
+      } else if (userCharacter.hp <= 0) {
+        
+        displayStuff();
+
+        console.log("error position six");
+
+      } else {
+        console.log("defeated character");
         defeatedCharacter();
         displayStuff();
-      } userCharacter.attack = userCharacter.attack + 10;
-       } );
       }
+    } ) ; }
 
 // calculate new character stats THIS SECTION NEEDS WORK-----------------------------------------------------------------------------------------
-  function computerfightAction() {
-      userCharacter.hp = userCharacter.hp - computerCharacter.counterAttack;
-      } 
 
       function userfightAction() {
+        userCharacter.attack = userCharacter.attack + 10;
         computerCharacter.hp = computerCharacter.hp - userCharacter.attack;
         } 
+
+        function computerfightAction() {
+          userCharacter.hp = userCharacter.hp - computerCharacter.counterAttack;
+          } 
 // ---------------------------------------------------------------------------------------------------------------------------------------------
 
 
   var defeatedName ="";
 
     function defeatedCharacter () {
-      if (computerCharacter.hp <= 0){
       $(computerCharacter).removeClass("comp-chara-sel");
       $(computerCharacter).addClass("defeated");
       defeatedName = computerCharacter.display;
@@ -274,7 +291,7 @@ hoverCharacter();
       $(".defeated").hide();
       game.opponents-- ;
       game.step = 1;
-      }}
+      }
 
      // display the results of the attack state ------------------------------------------------------------------------------------------------------------------------
   function displayStuff() {
@@ -287,7 +304,8 @@ hoverCharacter();
       $(".losss").text("Lose: "+ game.losses);
       checkStats();
     } else if (!computerCharacter) {
-      $("div.user-chara-sel > p").text(userCharacter.hp);
+      $(".user-hp-meter").attr('aria-valuenow', userCharacter.hp).css('width', userCharacter.hp + '%');
+      $(".comp-hp-meter").attr('aria-valuenow', computerCharacter.hp).css('width', computerCharacter.hp + '%');
       $(".box-four").text(userCharacter.display + " did " + userCharacter.attack + " damage");
       $(".box-three").text(defeatedName + " was defeated! Please select the next enemy to defeat!");
       $(".win").text("Win: " + game.wins);
@@ -318,7 +336,11 @@ hoverCharacter();
       function reset(){
         $(".chara-button").remove();
         console.log(game);
+        userCharacter.attack = "";
+        userCharacter.hp = "";
+        userCharacter.imgSrc = "";
         userCharacter = "";
+
         computerCharacter = "";
         game.step = 0;
         game.opponents = 3;
@@ -350,6 +372,7 @@ hoverCharacter();
   function winState () {
     hideCharacterScreen();
     toggleWinScreen();
+
     $(".victory-img").attr("src", userCharacter.imgSrc);
     game.wins++ ;
   }
@@ -387,6 +410,19 @@ hoverCharacter();
 
   $(".crawl").on("click", function (){
     crawl.style.animationPlayState = "running";
+  })
+
+  $("#log").on("click", function (){
+    console.log("user character " + userCharacter.display);
+    console.log("user character attack " + userCharacter.attack);
+    console.log("user character hp " + userCharacter.hp )
+    console.log("computer Character " + computerCharacter.display)
+    console.log("computer Character attack " + computerCharacter.counterAttack)
+    console.log("computer Character hp " + computerCharacter.hp)
+    
+
+
+    
   })
      
   
