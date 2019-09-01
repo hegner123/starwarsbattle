@@ -6,11 +6,6 @@ body {
   background-image: url("../images/stars.jpg");
 }
 
-.header {
-  color: white;
-  font-size:3rem;
-}
-
 .action-display {
   position: relative;
   font-size: 2rem;
@@ -20,13 +15,37 @@ body {
   margin-left: -3rem;
 }
 
+.arena-character {
+  display:flex;
+  justify-content: center;
+}
+
+.attack-button-div {
+  align-self: center;
+}
+
+.footer {
+  max-height:3rem;
+  height:3rem;
+  display:block;
+}
+
+.header {
+  color: white;
+  font-size:3rem;
+}
+
 .char-display {
   min-height: 600px;
-  
 }
+
 .box {
   color:#ffffff;
   list-style: none;
+  font-size:1rem;
+  padding:1rem;
+  background:black;
+  border:solid white 1px;
 }
 
 .box-box {
@@ -40,12 +59,10 @@ body {
 }
 
 .user-chara-sel {
-  border: solid 1px green;
+  opacity: 0.5;
 }
 
-.comp-chara-sel {
-  border: solid 1px red;
-}
+
 
 .character {
   height: 200px;
@@ -56,7 +73,6 @@ body {
 
 .character-image:hover{
   opacity: 0.8;
-  background-color:black;
   cursor: pointer;
 }
 
@@ -80,24 +96,24 @@ body {
   glyph-orientation-vertical: auto;
 }
 
-.attack-button-div {
-  align-self: center;
-}
-
 #attack-button {
   padding: 20px;
-}
-
-.arena-character {
-  display:flex;
-  justify-content: center;
 }
 
 .win {
   color: white;
 }
+
 .loss {
   color: white;
+}
+
+
+
+.reset-button {
+  padding: 1rem;
+  position: absolute;
+  bottom:2rem;
 }
 
 .scoreboard {
@@ -106,6 +122,7 @@ body {
   border: solid 5px white;
   height: 15rem;
 }
+
 .star-wars {
   /* Flexbox to center the entire element on the screen */
   display: flex;
@@ -137,7 +154,6 @@ body {
   animation-iteration-count:infinite;
 }
 
-
 @keyframes crawl {
   0% {
     /* The element starts below the screen */
@@ -151,4 +167,5 @@ body {
     /* Slightly increasing the rotation at the end and moving the text far away from the viewer */
     transform: rotateX(25deg) translateZ(-2500px);
   }
+
 }

@@ -1,15 +1,40 @@
 $(document).ready(function () {
   $(".scoreboard").hide();
-  hiddenArena();
-  hiddenWinScreen();
+  hideArena();
+  hideWinScreen();
+  hideCharacterDisplay();
+
+  function hideCharacterDisplay () {
+    $(".user-character-display").hide();
+  }
 
 
-  function hiddenArena (){
+  function hideArena (){
     $(".arena").hide();
   }
 
-  function hiddenWinScreen () {
+  function hideWinScreen () {
     $(".win-screen").hide();
+  }
+
+  function hideCharacterScreen () {
+    $(".character-select-screen").hide();
+  }
+
+  function toggleArena (){
+    $(".arena").toggle();
+  }
+
+  function toggleWinScreen () {
+    $(".win-screen").toggle();
+  }
+
+  function toggleCharacterDisplay () {
+    $(".user-character-display").toggle();
+  }
+
+  function toggleCharacterScreen () {
+    $(".character-select-screen").toggle();
   }
 
   
@@ -111,17 +136,14 @@ hoverCharacter();
     characterbtn.addClass("chara-button not-selected col col-6 float-left " + characters[i]);
     characterbtn.data("data", characters[i]);
     characterbtn.prependTo("#char-sel");
-    
     characterImage();
     characterText();
-
     function characterText() {
       var charText = $("<p>");
       charText.addClass("char-text text-center");
       charText.text(hitpoints)
       charText.appendTo(characterbtn);
       };
-
     function characterImage() {
       var charImg = $("<img>");
       charImg.addClass("imgClear character-image img-fluid img-" + characters[i]);
@@ -137,14 +159,12 @@ hoverCharacter();
       if (game.step < 1) {
         userCharacter = $(this).data();
         $(this).addClass("user-chara-sel");
-        
-
+        toggleCharacterDisplay();
+        $(".user-img").attr("src", $(this).imgSrc)
         game.state = compCharacterSel();
-       
         game.step += 1;
         return "charaSel"
-      } else {;}
-      } )
+      } } )
       }
 
 // chose a character for the computer------------------------------------------------------------------------------------------------------------------------- 
@@ -158,8 +178,7 @@ hoverCharacter();
         game.state = attackState();
         game.step += 1;
         assignCharacterData();
-      } else {;}
-      } )
+      } } )
       }
 
 
@@ -190,9 +209,8 @@ hoverCharacter();
 
 // function to be run when player has chosen a character and chosen a character for computer player------------------------------------------
   function attackState() {
-    $(".character-select-screen").hide();
-    $(".arena").show();
-    
+    hideCharacterScreen ()
+    toggleArena();
     $("#attack-button").on("click", function () {
       console.log("hi");
       if ((game.state == winState) || (game.state == loseState)) {
@@ -209,9 +227,7 @@ hoverCharacter();
       } else if ((userCharacter.hp <= 0) || (computerCharacter.hp <= 0)) {
         defeatedCharacter();
         displayStuff();
-        
-      } else {;}
-      } );
+      } } );
       }
 
 // calculate new character stats THIS SECTION NEEDS WORK-----------------------------------------------------------------------------------------
@@ -242,8 +258,6 @@ hoverCharacter();
      // display the results of the attack state ------------------------------------------------------------------------------------------------------------------------
   function displayStuff() {
     if (!computerCharacter == false){
-      $("div.user-chara-sel > p").text(userCharacter.hp);
-      $("div.comp-chara-sel > p").text(computerCharacter.hp);
       $(".box-four").text(userCharacter.display + " did " + userCharacter.attack + " damage");
       $(".box-three").text(computerCharacter.display + " did " + computerCharacter.counterAttack + " damage");
       $(".win").text("Win: " + game.wins);
@@ -255,17 +269,19 @@ hoverCharacter();
       $(".box-three").text(defeatedName + " was defeated! Please select the next enemy to defeat!");
       $(".win").text("Win: " + game.wins);
       $(".loss").text("Lose: "+ game.losses);
-      checkStats();
       $(".arena").hide();
       $(".character-select-screen").show();
-    } }
+      checkStats();
+    } 
+    $(".win").text("Win: " + game.wins);
+    $(".loss").text("Lose: "+ game.losses);
+  }
 
   // runs at the end of display stuff, final action of attack chain of functions.
     function checkStats () {
       if (game.opponents == 0) {
-    $(".character-select-screen").show();
-    $(".character-select-screen").hide();
-    $(".win-screen").show();
+        hideCharacterScreen();
+        toggleWinScreen();
         game.state = winState();
       } else if ((userCharacter.hp <= 0) && (!userCharacter == false)) {
         userCharacter = "";
@@ -302,6 +318,8 @@ hoverCharacter();
         $(".character-select-screen").show();
         hoverCharacter();
         resetAnimation();
+        hideWinScreen();
+
         }
 
   function winState () {
