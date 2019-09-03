@@ -139,6 +139,10 @@ body {
   height: inherit;
 }
 
+.user-img-text {
+  color:white;
+}
+
 .star-wars {
   /* Flexbox to center the entire element on the screen */
   display: flex;
