@@ -54,7 +54,7 @@ $(document).ready(function () {
 
   function toggleBox() {
     console.log("toggle box")
-    $(".box").toggle();
+    $(".box").show();
   }
 
   
@@ -156,11 +156,12 @@ hoverCharacter();
   for (i = 0; i < characters.length; i++) {
     var hitpoints = characterObject[i].hp;
     var charImgSrc = characterObject[i].imgSrc;
+    var displayName = characterObject[i].display;
     var characterbtn = $("<div>");
     characterbtn.addClass("chara-button not-selected col col-6 float-left " + characters[i]);
     characterbtn.data("data", characters[i]);
-    characterbtn.attr("imgSrc", charImgSrc)
-    
+    characterbtn.attr("imgSrc", charImgSrc);
+    characterbtn.attr("data", displayName);
     characterbtn.prependTo("#char-sel");
     characterImage();
     characterText();
@@ -190,10 +191,11 @@ hoverCharacter();
       if (game.step < 1) {
         userCharacter = $(this).data();
         $(this).addClass("user-chara-sel");
-        $(".user-character-display").toggle();
+        $(".user-character-display").show();;
         $(this).hide();
         $(".user-img").attr("src", $(this).attr("imgsrc"));
-        $(".user-img-text").text($("this"))
+        console.log($(this).attr("displayName"));
+        $(".user-img-text").text();
         game.state = compCharacterSel();
         game.step = game.step + 1;
         return "charaSel"
@@ -307,7 +309,10 @@ hoverCharacter();
       game.opponents-- ;
       game.step = 1;
       $("#character-select-button").show();
+      $("#attack-button").hide();
       characterSelectButton();
+      checkStats();
+
 
       }
 
@@ -328,7 +333,7 @@ hoverCharacter();
       $(".comp-hp-meter").attr('aria-valuenow', computerCharacter.hp).css('width', computerCharacter.hp + '%');
       $(".win").text("Win: " + game.wins);
       $(".losss").text("Lose: "+ game.losses);
-      checkStats();
+      
     } else if (!computerCharacter) {
       $(".user-hp-meter").attr('aria-valuenow', userCharacter.hp).css('width', userCharacter.hp + '%');
       $(".comp-hp-meter").attr('aria-valuenow', computerCharacter.hp).css('width', computerCharacter.hp + '%');
@@ -336,7 +341,7 @@ hoverCharacter();
       $(".box-three").text(defeatedName + " was defeated! Please select the next enemy to defeat!");
       $(".win").text("Win: " + game.wins);
       $(".loss").text("Lose: "+ game.losses);
-      checkStats();
+      
     } 
     $(".win").text("Win: " + game.wins);
     $(".loss").text("Lose: "+ game.losses);
@@ -365,7 +370,7 @@ hoverCharacter();
         defeatedCharacterState = false;
         userCharacter.attack = "";
         userCharacter.hp = "";
-        userCharacter.imgSrc = "";
+        
         userCharacter = "";
         computerCharacter = "";
         game.step = 0;
