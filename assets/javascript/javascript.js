@@ -72,18 +72,18 @@ $(document).ready(function () {
   // character values ------------------------------------------------------------------------------------------------------------------------
   var lukeSkywalker = {
     data: "lukeSkywalker",
-    hp: 100,
-    attack: 2,
-    counterAttack: 2,
+    hp: 120,
+    attack: 1,
+    counterAttack: 15,
     display: "Luke Skywalker",
     imgSrc:"../starwarsbattle/assets/images/coolCharacters/lukeSkywalker-big.jpg",
   }
 
   var bobbaFett = {
     data: "bobbaFett",
-    hp: 100,
+    hp: 130,
     attack: 2,
-    counterAttack: 2,
+    counterAttack: 1,
     display: "Bobba Fett",
     imgSrc:"../starwarsbattle/assets/images/coolCharacters/bobbaFett-big.jpg",
   }
@@ -91,17 +91,17 @@ $(document).ready(function () {
   var chewbaca = {
     data: "chewbaca",
     hp: 100,
-    attack: 2,
-    counterAttack: 2,
+    attack: 5,
+    counterAttack: 10,
     display: "Chewbaca",
     imgSrc:"../starwarsbattle/assets/images/coolCharacters/chewbaca-big.jpg"
   }
 
   var darthVader = {
     data: "darthVader",
-    hp: 100,
-    attack: 2,
-    counterAttack: 2,
+    hp: 145,
+    attack: 3,
+    counterAttack: 5,
     display: "Darth Vader",
     imgSrc:"../starwarsbattle/assets/images/coolCharacters/darthVader-big.jpg",
   }
@@ -219,7 +219,7 @@ hoverCharacter();
         game.state = attackState();
         game.step = game.step + 1;
         assignCharacterData();
-        $(".user-hp-meter").attr("aria-valuenow", 100).css("width", 100 + '%');
+        $(".user-hp-meter").attr("aria-valuenow", 100).css("width", userCharacter.hp + '%');
         $(".comp-hp-meter").attr("aria-valuenow", 100).css("width", 100 + '%');
       } } )
       }
@@ -398,15 +398,15 @@ var x = 0;
         computerCharacter = "";
         game.step = 0;
         game.opponents = 3;
-        lukeSkywalker.hp = 100;
-        lukeSkywalker.attack = 2;
+        lukeSkywalker.hp = 120;
+        lukeSkywalker.attack = 1;
         chewbaca.hp = 100;
-        chewbaca.attack = 2;
-        bobbaFett.hp = 100;
+        chewbaca.attack = 5;
+        bobbaFett.hp = 130;
         bobbaFett.attack = 2; 
-        darthVader.hp = 100;
-        darthVader.attack = 2;
-        attacking = false;
+        darthVader.hp = 140;
+        darthVader.attack = 3;
+        
         createCharacterDiv();
         charaSel();
         $(".box-one").text("");
