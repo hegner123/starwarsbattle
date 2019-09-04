@@ -94,7 +94,7 @@ body {
   glyph-orientation-vertical: auto;
 }
 
-#attack-button {
+.attack-button {
   padding: 20px;
 }
 

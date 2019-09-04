@@ -6,6 +6,9 @@ $(document).ready(function () {
   hideCharacterDisplay();
   hideBox();
 
+
+  
+
   function hideCharacterDisplay () {
     console.log("hide character display")
     $(".user-character-display").hide();
@@ -242,10 +245,11 @@ hoverCharacter();
           }
           $(".comp-character-attack-img").attr("src", computerCharacter.imgSrc);
           $(".user-character-attack-img").attr("src", userCharacter.imgSrc);
+          console.log(computerCharacter);
           } 
       }
 
-      
+      var attacking = false;
 
 // function to be run when player has chosen a character and chosen a character for computer player------------------------------------------
   function attackState() {
@@ -254,33 +258,46 @@ hoverCharacter();
     hideCharacterScreen();
     toggleArena();
     toggleBox();
+    
     $(".user-hp-meter").attr('aria-valuenow', userCharacter.hp).css('width', userCharacter.hp + '%');
     $(".comp-hp-meter").attr('aria-valuenow', computerCharacter.hp).css('width', computerCharacter.hp + '%');
-    $("#attack-button").on("click", function () {
+    var newButton = $("<button>");
+    newButton.addClass("attack-button");
+    newButton.text("ATTACK");
+    newButton.appendTo($(".button-div"));
+    $(newButton).on("click", function () {
+      x += 1;
       if ((userCharacter.hp > 0)) {
+        console.log("attack button click")
         userfightAction();
         displayStuff();
-        console.log("2");
+        
       } else {
         displayStuff();
       }
       });
       }
 
-
+var x = 0;
 // calculate new character stats THIS SECTION NEEDS WORK-----------------------------------------------------------------------------------------
 
       function userfightAction() {
+        
+        console.log(x)
         console.log("user fight action")
         userCharacter.attack = userCharacter.attack + 10;
-        console.log(userCharacter.attack);
         computerCharacter.hp = computerCharacter.hp - userCharacter.attack;
-        console.log(computerCharacter.hp);
+        
+        
         if ((computerCharacter.hp > 0) && (!computerCharacter === false)){
           computerfightAction();
+          console.log(computerCharacter);
+          console.log(userCharacter);
         } else if (!computerCharacter) {
           ;
         } else {
+          console.log(computerCharacter);
+          console.log(userCharacter);
           defeatedCharacter();
         }
         } 
@@ -298,28 +315,27 @@ hoverCharacter();
   var defeatedName ="";
 
     function defeatedCharacter () {
+      console.log("defeated character");
       $(".user-hp-meter").attr('aria-valuenow', userCharacter.hp).css('width', userCharacter.hp + '%');
       $(".comp-hp-meter").attr('aria-valuenow', computerCharacter.hp).css('width', computerCharacter.hp + '%');
-      console.log("defeated character")
       $(computerCharacter).removeClass("comp-chara-sel");
       $(computerCharacter).addClass("defeated");
       defeatedName = computerCharacter.display;
+      computerCharacter.hp = 100;
       computerCharacter = "";
       $(".defeated").hide();
       game.opponents-- ;
       game.step = 1;
       $("#character-select-button").show();
-      $("#attack-button").hide();
       characterSelectButton();
+      $(".attack-button").remove();
       checkStats();
-
-
       }
 
       function characterSelectButton (){
         $("#character-select-button").on("click",function (){
-          $(".arena").hide();
-          $(".character-select-screen").show();
+        $(".arena").hide();
+        $(".character-select-screen").show();
         })
       }
 
@@ -328,6 +344,7 @@ hoverCharacter();
     console.log("display stuff")
 
     if (game.state == "Win State") {
+      console.log("if statement 1")
       $(".user-hp-meter").attr('aria-valuenow', userCharacter.hp).css('width', userCharacter.hp + '%');
       $(".comp-hp-meter").attr('aria-valuenow', computerCharacter.hp).css('width', computerCharacter.hp + '%');
       $(".box-four").text(userCharacter.display + " did " + userCharacter.attack + " damage");
@@ -336,6 +353,7 @@ hoverCharacter();
       $(".loss").text("Lose: "+ game.losses);
       
     } else if (!computerCharacter == false){
+      console.log("if statement two");
       $(".box-four").text(userCharacter.display + " did " + userCharacter.attack + " damage");
       $(".box-three").text(computerCharacter.display + " did " + computerCharacter.counterAttack + " damage");
       $(".user-hp-meter").attr('aria-valuenow', userCharacter.hp).css('width', userCharacter.hp + '%');
@@ -344,6 +362,7 @@ hoverCharacter();
       $(".losss").text("Lose: "+ game.losses);
       
     } else if (!computerCharacter) {
+      console.log("If statement three")
       $(".user-hp-meter").attr('aria-valuenow', userCharacter.hp).css('width', userCharacter.hp + '%');
       $(".comp-hp-meter").attr('aria-valuenow', computerCharacter.hp).css('width', computerCharacter.hp + '%');
       $(".box-four").text(userCharacter.display + " did " + userCharacter.attack + " damage");
@@ -352,10 +371,6 @@ hoverCharacter();
       $(".loss").text("Lose: "+ game.losses);
       
     } 
-    
-
-    $(".win").text("Win: " + game.wins);
-    $(".loss").text("Lose: "+ game.losses);
   }
 
   // runs at the end of display stuff, final action of attack chain of functions.
@@ -377,11 +392,8 @@ hoverCharacter();
       function reset(){
         console.log("reset")
         $(".chara-button").remove();
-        console.log(game);
-        defeatedCharacterState = false;
         userCharacter.attack = "";
         userCharacter.hp = "";
-        
         userCharacter = "";
         computerCharacter = "";
         game.step = 0;
@@ -394,6 +406,7 @@ hoverCharacter();
         bobbaFett.attack = 2; 
         darthVader.hp = 100;
         darthVader.attack = 2;
+        attacking = false;
         createCharacterDiv();
         charaSel();
         $(".box-one").text("");
