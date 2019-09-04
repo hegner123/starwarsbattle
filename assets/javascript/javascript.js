@@ -326,7 +326,16 @@ hoverCharacter();
      // display the results of the attack state ------------------------------------------------------------------------------------------------------------------------
   function displayStuff() {
     console.log("display stuff")
-    if (!computerCharacter == false){
+
+    if (game.state == "Win State") {
+      $(".user-hp-meter").attr('aria-valuenow', userCharacter.hp).css('width', userCharacter.hp + '%');
+      $(".comp-hp-meter").attr('aria-valuenow', computerCharacter.hp).css('width', computerCharacter.hp + '%');
+      $(".box-four").text(userCharacter.display + " did " + userCharacter.attack + " damage");
+      $(".box-three").text(userCharacter.display + " wins!");
+      $(".win").text("Win: " + game.wins);
+      $(".loss").text("Lose: "+ game.losses);
+      
+    } else if (!computerCharacter == false){
       $(".box-four").text(userCharacter.display + " did " + userCharacter.attack + " damage");
       $(".box-three").text(computerCharacter.display + " did " + computerCharacter.counterAttack + " damage");
       $(".user-hp-meter").attr('aria-valuenow', userCharacter.hp).css('width', userCharacter.hp + '%');
@@ -343,6 +352,8 @@ hoverCharacter();
       $(".loss").text("Lose: "+ game.losses);
       
     } 
+    
+
     $(".win").text("Win: " + game.wins);
     $(".loss").text("Lose: "+ game.losses);
   }
@@ -405,9 +416,14 @@ hoverCharacter();
     hideCharacterScreen();
     toggleWinScreen();
     hideArena();
+    displayStuff();
+    
+    
+
 
     $(".victory-img").attr("src", userCharacter.imgSrc);
     game.wins++ ;
+    return "Win State";
   }
 
   function loseState () {
