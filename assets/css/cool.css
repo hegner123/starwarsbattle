@@ -90,12 +90,17 @@ body {
   align-self: center;
 }
 
+.character-select-button {
+  padding: 20px;
+}
+
 .versus-text {
   glyph-orientation-vertical: auto;
 }
 
 .attack-button {
   padding: 20px;
+  background: red;
 }
 
 .win {

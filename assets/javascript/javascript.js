@@ -262,7 +262,7 @@ hoverCharacter();
     $(".user-hp-meter").attr('aria-valuenow', userCharacter.hp).css('width', userCharacter.hp + '%');
     $(".comp-hp-meter").attr('aria-valuenow', computerCharacter.hp).css('width', computerCharacter.hp + '%');
     var newButton = $("<button>");
-    newButton.addClass("attack-button");
+    newButton.addClass("attack-button btn");
     newButton.text("ATTACK");
     newButton.appendTo($(".button-div"));
     $(newButton).on("click", function () {
