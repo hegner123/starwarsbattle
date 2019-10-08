@@ -7,7 +7,7 @@ $(document).ready(function () {
   hideBox();
 
 
-  
+
 
   function hideCharacterDisplay () {
     console.log("hide character display")
@@ -45,34 +45,25 @@ $(document).ready(function () {
     $(".win-screen").toggle();
   }
 
-  function toggleCharacterDisplay () {
-    console.log("toggle character display")
-    $(".user-character-display").toggle();
-  }
-
-  function toggleCharacterScreen () {
-    console.log("toggle character screen")
-    $(".character-select-screen").toggle();
-  }
-
   function toggleBox() {
     console.log("toggle box")
     $(".box").show();
   }
 
-  
+
   // main character variables
 
   var userCharacter = "";
 
   var computerCharacter = "";
 
-  
+
 
   // character values ------------------------------------------------------------------------------------------------------------------------
   var lukeSkywalker = {
     data: "lukeSkywalker",
     hp: 120,
+    ratio: 1.2,
     attack: 1,
     counterAttack: 15,
     display: "Luke Skywalker",
@@ -82,6 +73,7 @@ $(document).ready(function () {
   var bobbaFett = {
     data: "bobbaFett",
     hp: 130,
+    ratio: 1.3,
     attack: 2,
     counterAttack: 1,
     display: "Bobba Fett",
@@ -91,6 +83,7 @@ $(document).ready(function () {
   var chewbaca = {
     data: "chewbaca",
     hp: 100,
+    ratio: 1,
     attack: 5,
     counterAttack: 10,
     display: "Chewbaca",
@@ -100,49 +93,50 @@ $(document).ready(function () {
   var darthVader = {
     data: "darthVader",
     hp: 145,
+    ratio: 1.45,
     attack: 3,
     counterAttack: 5,
     display: "Darth Vader",
     imgSrc:"../starwarsbattle/assets/images/coolCharacters/darthVader-big.jpg",
   }
 
-        function hoverCharacter() {
-          $( ".img-lukeSkywalker" ).hover( 
-            function() {
-              $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/lukeSkywalker-big.jpg" );
-            }, function() {
-              $(".charDisplay" ).attr("src","").empty();
-            }
-          );
+  function hoverCharacter() {
+    $( ".img-lukeSkywalker" ).hover(
+      function() {
+        $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/lukeSkywalker-big.jpg" );
+      }, function() {
+        $(".charDisplay" ).attr("src","").empty();
+      }
+    );
 
-          $( ".img-bobbaFett" ).hover( 
-            function() {
-              $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/bobbaFett-big.jpg" );
-            }, function() {
-              $(".charDisplay" ).attr("src","").empty();
-            }
-          );
+    $( ".img-bobbaFett" ).hover(
+      function() {
+        $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/bobbaFett-big.jpg" );
+      }, function() {
+        $(".charDisplay" ).attr("src","").empty();
+      }
+    );
 
-          $( ".img-darthVader" ).hover( 
-            function() {
-              $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/darthVader-big.jpg" );
-            }, function() {
-              $(".charDisplay" ).attr("src","").empty();
-            }
-          );
+    $( ".img-darthVader" ).hover(
+      function() {
+        $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/darthVader-big.jpg" );
+      }, function() {
+        $(".charDisplay" ).attr("src","").empty();
+      }
+    );
 
-          $( ".img-chewbaca" ).hover( 
-            function() {
-              $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/chewbaca-big.jpg" );
-            }, function() {
-              $(".charDisplay" ).attr("src","").empty();
-            }
-          );
-        }
+    $( ".img-chewbaca" ).hover(
+      function() {
+        $(".charDisplay").attr("src","../starwarsbattle/assets/images/coolCharacters/chewbaca-big.jpg" );
+      }, function() {
+        $(".charDisplay" ).attr("src","").empty();
+      }
+    );
+  };
 
-          
 
- 
+
+
 
 // character arrays ----------------------------------------------------------------------------------------------------------------------------------------------------------------
   var characters = ["lukeSkywalker", "bobbaFett", "chewbaca", "darthVader"];
@@ -154,170 +148,173 @@ createCharacterDiv();
 hoverCharacter();
 
   // create div's with images with for loop------------------------------------------------------------------------------------------------
-  function createCharacterDiv () {
-    console.log("create character div")
-  for (i = 0; i < characters.length; i++) {
-    var hitpoints = characterObject[i].hp;
-    var charImgSrc = characterObject[i].imgSrc;
-    var displayName = characterObject[i].display;
-    var characterbtn = $("<div>");
-    characterbtn.addClass("chara-button not-selected col col-6 float-left " + characters[i]);
-    characterbtn.data("data", characters[i]);
-    characterbtn.attr("imgSrc", charImgSrc);
-    characterbtn.attr("data", displayName);
-    characterbtn.prependTo("#char-sel");
-    characterImage();
-    characterText();
-    function characterText() {
-      console.log("character text")
-      var charText = $("<p>");
-      charText.addClass("char-text text-center");
-      charText.text(hitpoints)
-      charText.appendTo(characterbtn);
+    function createCharacterDiv () {
+      console.log("create character div")
+      for (i = 0; i < characters.length; i++) {
+        var hitpoints = characterObject[i].hp;
+        var charImgSrc = characterObject[i].imgSrc;
+        var displayName = characterObject[i].display;
+        var characterbtn = $("<div>");
+        characterbtn.addClass("chara-button not-selected col col-6 float-left " + characters[i]);
+        characterbtn.data("data", characters[i]);
+        characterbtn.attr("imgSrc", charImgSrc);
+        characterbtn.attr("data", displayName);
+        characterbtn.prependTo("#char-sel");
+        characterImage();
+        characterText();
+        function characterText() {
+          console.log("character text")
+          var charText = $("<p>");
+          charText.addClass("char-text text-center");
+          charText.text(hitpoints)
+          charText.appendTo(characterbtn);
+          };
+        function characterImage() {
+          console.log("character image")
+          var charImg = $("<img>");
+          charImg.addClass("imgClear character-image img-fluid img-" + characters[i]);
+          charImg.appendTo(characterbtn);
+          charImg.attr("src", "../starwarsbattle/assets/images/coolCharacters/" + characters[i] + "-thumbnail.jpg");
+          };
       };
-    function characterImage() {
-      console.log("character image")
-      var charImg = $("<img>");
-      charImg.addClass("imgClear character-image img-fluid img-" + characters[i]);
-      charImg.appendTo(characterbtn);
-      charImg.attr("src", "../starwarsbattle/assets/images/coolCharacters/" + characters[i] + "-thumbnail.jpg");
-      };
-      }
-      }
+    };
 
 // chose a character----------------------------------------------------------------------------------------------------------------
-  function charaSel() {
-    console.log("chara sel")
-    
-    $(".chara-button").on("click", function () {
-      console.log("character button click")
-      if (game.step < 1) {
-        userCharacter = $(this).data();
-        $(this).addClass("user-chara-sel");
-        $(".user-character-display").show();;
-        $(this).hide();
-        $(".user-img").attr("src", $(this).attr("imgsrc"));
-        console.log($(this).attr("displayName"));
-        $(".user-img-text").text();
-        game.state = compCharacterSel();
-        game.step = game.step + 1;
-        return "charaSel"
-      } } )
-      }
+    function charaSel() {
+      console.log("chara sel");
+      $(".chara-button").on("click", function () {
+        console.log("character button click");
+        if (game.step < 1) {
+          userCharacter = $(this).data();
+          $(this).addClass("user-chara-sel");
+          $(".user-character-display").show();;
+          $(this).hide();
+          $(".user-img").attr("src", $(this).attr("imgsrc"));
+          console.log($(this).attr("displayName"));
+          $(".user-img-text").text();
+          game.state = compCharacterSel();
+          game.step = game.step + 1;
+          return "charaSel" ;
+        };
+      });
+    };
 
-// chose a character for the computer------------------------------------------------------------------------------------------------------------------------- 
+// chose a character for the computer-------------------------------------------------------------------------------------------------------------------------
 
-  function compCharacterSel() {
-    console.log("computer character select")
-    $(".chara-button").on("click", function () {
-      defeatedCharacterState = false;
-      console.log("computer character click")
-      if (game.step < 2 && ($(this).hasClass("not-selected"))) {
-        computerCharacter = $(this).data();
-        $(this).addClass("comp-chara-sel");
-        $(".comp-chara-sel").hide();
-        game.state = attackState();
-        game.step = game.step + 1;
-        assignCharacterData();
-        $(".user-hp-meter").attr("aria-valuenow", 100).css("width", userCharacter.hp + '%');
-        $(".comp-hp-meter").attr("aria-valuenow", 100).css("width", 100 + '%');
-      } } )
-      }
+    function compCharacterSel() {
+      console.log("computer character select");
+      $(".chara-button").on("click", function () {
+        defeatedCharacterState = false;
+        console.log("computer character click");
+        if (game.step < 2 && ($(this).hasClass("not-selected"))) {
+          computerCharacter = $(this).data();
+          $(this).addClass("comp-chara-sel");
+          $(".comp-chara-sel").hide();
+          game.state = attackState();
+          game.step = game.step + 1;
+          assignCharacterData();
+          var userHpDisplay = healthRatio(userCharacter.hp, userCharacter.ratio);
+      var computerHpDisplay = healthRatio(computerCharacter.hp, computerCharacter.ratio);
+      $(".user-hp-meter").attr('aria-valuenow', userHpDisplay).css('width', userHpDisplay + '%');
+      $(".comp-hp-meter").attr('aria-valuenow', computerHpDisplay).css('width', computerHpDisplay + '%');
+        };
+      });
+    };
 
 
 
-      function assignCharacterData () {
-        console.log("assign character data")
-        // if computer character has not been chosen, do nothing
-      if (!computerCharacter) {
-        ;
-        // if computer character has been choosen, run the following loop to assign character data to the div.
-      } else if (!computerCharacter == false){
-        // for however many items in the characater object array
-        for (j = 0; j < characterObject.length; j++) {
-          // if user character data matches the data of the current index of character object assign that data to user characater
-          if (userCharacter.data == characterObject[j].data) {
-            userCharacter = characterObject[j];
-            // if computer character data matches the data of the current index of character object assign that data to computercharacater
-          } else if (computerCharacter.data == characterObject[j].data) {
-            computerCharacter = characterObject[j];
-          } else {;}
-          }
-          $(".comp-character-attack-img").attr("src", computerCharacter.imgSrc);
-          $(".user-character-attack-img").attr("src", userCharacter.imgSrc);
-          console.log(computerCharacter);
-          } 
-      }
+    function assignCharacterData () {
+      console.log("assign character data")
+      // if computer character has not been chosen, do nothing
+    if (!computerCharacter) {
+      ;
+      // if computer character has been choosen, run the following loop to assign character data to the div.
+    } else if (!computerCharacter == false){
+      // for however many items in the characater object array
+      for (j = 0; j < characterObject.length; j++) {
+        // if user character data matches the data of the current index of character object assign that data to user characater
+        if (userCharacter.data == characterObject[j].data) {
+          userCharacter = characterObject[j];
+          // if computer character data matches the data of the current index of character object assign that data to computercharacater
+        } else if (computerCharacter.data == characterObject[j].data) {
+          computerCharacter = characterObject[j];
+        } else {;}
+        }
+        $(".comp-character-attack-img").attr("src", computerCharacter.imgSrc);
+        $(".user-character-attack-img").attr("src", userCharacter.imgSrc);
+        console.log(computerCharacter);
+        }
+    };
 
-      var attacking = false;
+  var attacking = false;
 
 // function to be run when player has chosen a character and chosen a character for computer player------------------------------------------
-  function attackState() {
-    console.log("attack state")
-    $("#character-select-button").hide();
-    hideCharacterScreen();
-    toggleArena();
-    toggleBox();
-    
-    $(".user-hp-meter").attr('aria-valuenow', userCharacter.hp).css('width', userCharacter.hp + '%');
-    $(".comp-hp-meter").attr('aria-valuenow', computerCharacter.hp).css('width', computerCharacter.hp + '%');
-    var newButton = $("<button>");
-    newButton.addClass("attack-button btn");
-    newButton.text("ATTACK");
-    newButton.appendTo($(".button-div"));
-    $(newButton).on("click", function () {
-      x += 1;
-      if ((userCharacter.hp > 0)) {
-        console.log("attack button click")
-        userfightAction();
-        displayStuff();
-        
-      } else {
-        displayStuff();
-      }
-      });
-      }
-
-var x = 0;
-// calculate new character stats THIS SECTION NEEDS WORK-----------------------------------------------------------------------------------------
-
-      function userfightAction() {
-        
-        console.log(x)
-        console.log("user fight action")
-        userCharacter.attack = userCharacter.attack + 10;
-        computerCharacter.hp = computerCharacter.hp - userCharacter.attack;
-        
-        
-        if ((computerCharacter.hp > 0) && (!computerCharacter === false)){
-          computerfightAction();
-          console.log(computerCharacter);
-          console.log(userCharacter);
-        } else if (!computerCharacter) {
-          ;
+    function attackState() {
+      console.log("attack state")
+      $("#character-select-button").hide();
+      hideCharacterScreen();
+      toggleArena();
+      toggleBox();
+      var userHpDisplay = healthRatio(userCharacter.hp, userCharacter.ratio);
+      var computerHpDisplay = healthRatio(computerCharacter.hp, computerCharacter.ratio);
+      $(".user-hp-meter").attr('aria-valuenow', userHpDisplay).css('width', userHpDisplay + '%');
+      $(".comp-hp-meter").attr('aria-valuenow', computerHpDisplay).css('width', computerHpDisplay + '%');
+      var newButton = $("<button>");
+      newButton.addClass("attack-button btn");
+      newButton.text("ATTACK");
+      newButton.appendTo($(".button-div"));
+      $(newButton).on("click", function () {
+        x += 1;
+        if ((userCharacter.hp > 0)) {
+          console.log("attack button click");
+          userfightAction();
+          displayStuff();
         } else {
-          console.log(computerCharacter);
-          console.log(userCharacter);
-          defeatedCharacter();
-        }
-        } 
+          displayStuff();
+        };
+      });
+    };
 
-        function computerfightAction() {
-          console.log("computer fight action")
-          userCharacter.hp = userCharacter.hp - computerCharacter.counterAttack;
-          $(".user-hp-meter").attr('aria-valuenow', userCharacter.hp).css('width', userCharacter.hp + '%');
-          $(".comp-hp-meter").attr('aria-valuenow', computerCharacter.hp).css('width', computerCharacter.hp + '%');
-         
-          } 
+      var x = 0;
+// calculate new character stats -----------------------------------------------------------------------------------------
+
+    function userfightAction() {
+      console.log(x)
+      console.log("user fight action")
+      userCharacter.attack = userCharacter.attack + 10;
+      computerCharacter.hp = computerCharacter.hp - userCharacter.attack;
+      if ((computerCharacter.hp > 0) && (!computerCharacter === false)){
+        computerfightAction();
+        console.log(computerCharacter);
+        console.log(userCharacter);
+      } else if (!computerCharacter) {
+        ;
+      } else {
+        console.log(computerCharacter);
+        console.log(userCharacter);
+        defeatedCharacter();
+      };
+    };
+
+    function computerfightAction() {
+      console.log("computer fight action");
+      userCharacter.hp = userCharacter.hp - computerCharacter.counterAttack;
+      var userHpDisplay = healthRatio(userCharacter.hp, userCharacter.ratio);
+      var computerHpDisplay = healthRatio(computerCharacter.hp, computerCharacter.ratio);
+      $(".user-hp-meter").attr('aria-valuenow', userHpDisplay).css('width', userHpDisplay + '%');
+      $(".comp-hp-meter").attr('aria-valuenow', computerHpDisplay).css('width', computerHpDisplay + '%');
+      };
 // ---------------------------------------------------------------------------------------------------------------------------------------------
 
-  
-  var defeatedName ="";
+
+    var defeatedName ="";
 
     function defeatedCharacter () {
       console.log("defeated character");
-      $(".user-hp-meter").attr('aria-valuenow', userCharacter.hp).css('width', userCharacter.hp + '%');
-      $(".comp-hp-meter").attr('aria-valuenow', computerCharacter.hp).css('width', computerCharacter.hp + '%');
+      var userHpDisplay = healthRatio(userCharacter.hp, userCharacter.ratio);
+      var computerHpDisplay = healthRatio(computerCharacter.hp, computerCharacter.ratio);
+      $(".user-hp-meter").attr('aria-valuenow', userHpDisplay).css('width', userHpDisplay + '%');
+      $(".comp-hp-meter").attr('aria-valuenow', computerHpDisplay).css('width', computerHpDisplay + '%');
       $(computerCharacter).removeClass("comp-chara-sel");
       $(computerCharacter).addClass("defeated");
       defeatedName = computerCharacter.display;
@@ -330,48 +327,52 @@ var x = 0;
       characterSelectButton();
       $(".attack-button").remove();
       checkStats();
-      }
+    };
 
-      function characterSelectButton (){
-        $("#character-select-button").on("click",function (){
-        $(".arena").hide();
-        $(".character-select-screen").show();
-        })
-      }
+    function characterSelectButton (){
+      $("#character-select-button").on("click",function (){
+      $(".arena").hide();
+      $(".character-select-screen").show();
+      });
+    };
 
      // display the results of the attack state ------------------------------------------------------------------------------------------------------------------------
   function displayStuff() {
-    console.log("display stuff")
-
+    console.log("display stuff");
     if (game.state == "Win State") {
-      console.log("if statement 1")
-      $(".user-hp-meter").attr('aria-valuenow', userCharacter.hp).css('width', userCharacter.hp + '%');
-      $(".comp-hp-meter").attr('aria-valuenow', computerCharacter.hp).css('width', computerCharacter.hp + '%');
+      console.log("if statement 1");
+      var userHpDisplay = healthRatio(userCharacter.hp, userCharacter.ratio);
+      var computerHpDisplay = healthRatio(computerCharacter.hp, computerCharacter.ratio);
+      $(".user-hp-meter").attr('aria-valuenow', userHpDisplay).css('width', userHpDisplay + '%');
+      $(".comp-hp-meter").attr('aria-valuenow', computerHpDisplay).css('width', computerHpDisplay + '%');
       $(".box-four").text(userCharacter.display + " did " + userCharacter.attack + " damage");
       $(".box-three").text(userCharacter.display + " wins!");
       $(".win").text("Win: " + game.wins);
       $(".loss").text("Lose: "+ game.losses);
-      
+
     } else if (!computerCharacter == false){
       console.log("if statement two");
       $(".box-four").text(userCharacter.display + " did " + userCharacter.attack + " damage");
       $(".box-three").text(computerCharacter.display + " did " + computerCharacter.counterAttack + " damage");
-      $(".user-hp-meter").attr('aria-valuenow', userCharacter.hp).css('width', userCharacter.hp + '%');
-      $(".comp-hp-meter").attr('aria-valuenow', computerCharacter.hp).css('width', computerCharacter.hp + '%');
+      var userHpDisplay = healthRatio(userCharacter.hp, userCharacter.ratio);
+      var computerHpDisplay = healthRatio(computerCharacter.hp, computerCharacter.ratio);
+      $(".user-hp-meter").attr('aria-valuenow', userHpDisplay).css('width', userHpDisplay + '%');
+      $(".comp-hp-meter").attr('aria-valuenow', computerHpDisplay).css('width', computerHpDisplay + '%');
       $(".win").text("Win: " + game.wins);
       $(".losss").text("Lose: "+ game.losses);
-      
+
     } else if (!computerCharacter) {
-      console.log("If statement three")
-      $(".user-hp-meter").attr('aria-valuenow', userCharacter.hp).css('width', userCharacter.hp + '%');
-      $(".comp-hp-meter").attr('aria-valuenow', computerCharacter.hp).css('width', computerCharacter.hp + '%');
+      console.log("If statement three");
+      var userHpDisplay = healthRatio(userCharacter.hp, userCharacter.ratio);
+      var computerHpDisplay = healthRatio(computerCharacter.hp, computerCharacter.ratio);
+      $(".user-hp-meter").attr('aria-valuenow', userHpDisplay).css('width', userHpDisplay + '%');
+      $(".comp-hp-meter").attr('aria-valuenow', computerHpDisplay).css('width', computerHpDisplay + '%');
       $(".box-four").text(userCharacter.display + " did " + userCharacter.attack + " damage");
       $(".box-three").text(defeatedName + " was defeated! Please select the next enemy to defeat!");
       $(".win").text("Win: " + game.wins);
       $(".loss").text("Lose: "+ game.losses);
-      
-    } 
-  }
+    };
+  };
 
   // runs at the end of display stuff, final action of attack chain of functions.
     function checkStats () {
@@ -381,8 +382,9 @@ var x = 0;
       } else if ((userCharacter.hp <= 0) && (!userCharacter == false)) {
         userCharacter = "";
         game.state = loseState();
-      } $(".scoreboard").show();
-      }
+      ;}
+      $(".scoreboard").show();
+      };
 
       $("#reset").on("click", function () {
         console.log("reset click")
@@ -403,14 +405,13 @@ var x = 0;
         chewbaca.hp = 100;
         chewbaca.attack = 5;
         bobbaFett.hp = 130;
-        bobbaFett.attack = 2; 
+        bobbaFett.attack = 2;
         darthVader.hp = 140;
         darthVader.attack = 3;
-        
         createCharacterDiv();
         charaSel();
         $(".box-one").text("");
-        $(".box-three").text(""); 
+        $(".box-three").text("");
         $(".box-four").text("");
         game.state = charaSel();
         $(".arena").hide();
@@ -421,8 +422,7 @@ var x = 0;
         hideCharacterDisplay();
         hideBox();
         $(".user-img").attr("src", "");
-
-        }
+      };
 
   function winState () {
     console.log("win state")
@@ -430,14 +430,10 @@ var x = 0;
     toggleWinScreen();
     hideArena();
     displayStuff();
-    
-    
-
-
     $(".victory-img").attr("src", userCharacter.imgSrc);
     game.wins++ ;
     return "Win State";
-  }
+  };
 
   function loseState () {
     console.log("lose state")
@@ -445,8 +441,7 @@ var x = 0;
     $(".box-two").text("Wins: " + game.wins + "|| " + "Loses: " + game.losses);
     $(".box-four").text("You Lose")
     $(".box-three").text("");
-
-  }
+  };
 
   // primary game object.
   var game = {
@@ -460,20 +455,18 @@ var x = 0;
 //  auxillary disply functions -------------------------------------------------------------------------------
  // reset the transition by...
  function resetAnimation(){
-    
   $(".character-select-screen").hide();
   $(".arena").show();
   $(".arena").hide();
   $(".character-select-screen").show();
   crawl.style.animationPlayState = "paused";
-
   }
 
   var crawl = document.getElementById("crawl");
 
   $(".crawl").on("click", function (){
     crawl.style.animationPlayState = "running";
-  })
+  });
 
   $("#log").on("click", function (){
     console.log("user character " + userCharacter.display);
@@ -483,11 +476,13 @@ var x = 0;
     console.log("computer Character attack " + computerCharacter.counterAttack)
     console.log("computer Character hp " + computerCharacter.hp)
     console.log("Game" + game)
-    
+  });
 
 
-    
-  })
-     
-  
-  })
+  // math functions
+  function healthRatio(a,b){
+    return a/b
+  }
+
+
+});
