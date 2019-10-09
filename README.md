@@ -1,7 +1,7 @@
 # Star Wars Battle
 ## A Javascript Game
 
-[Github Page](https://hegner123.github.io/starwarsbattle/)
+Page [Github Page](https://hegner123.github.io/starwarsbattle/)
 
 ## Overview
 
